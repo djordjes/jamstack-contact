@@ -11,6 +11,4 @@
   to = "/.netlify/functions/proxy"
   status = 200
   force = true
-  [redirects.headers]
-    X-From = "Netlify"
-    X-Api-Key = "some-api-key-string HEADER_PLACEHOLDER"
+  [HEADER_PLACEHOLDER]
