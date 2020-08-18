@@ -5,10 +5,5 @@
     from = "/api/*"
     to = "/.netlify/functions/:splat"
     status = 200
-
-[[redirects]]
-  from = "/graphql"
-  to = "/.netlify/functions/proxy"
-  status = 200
-  force = true
-  [HEADER_PLACEHOLDER]
+    force = true
+    headers = { Authorization = "Bearer HEADER_PLACEHOLDER" }
