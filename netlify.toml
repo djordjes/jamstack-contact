@@ -3,7 +3,7 @@
 
 [[redirects]]
     from = "/api/*"
-    to = "/.netlify/functions/:splat"
+    to = "https://graphql.fauna.com/graphql"
     status = 200
     force = true
     headers = { Authorization = "Bearer HEADER_PLACEHOLDER" }
