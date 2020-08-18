@@ -7,8 +7,8 @@
     status = 200
 
 [[redirects]]
-  from = "/graphql"
-  to = "/.netlify/functions/contact"
-  status = 200
-  force = true
-  headers = {authorization = "Bearer HEADER_PLACEHOLDER"}
+    from = "/graphql"
+    to = "/.netlify/functions/proxy"
+    status = 200
+    force = true
+    headers = {X-foo = "HEADER_PLACEHOLDER"}
