@@ -1,5 +1,18 @@
 import React, { useReducer } from "react";
 import styles from "./form.module.css";
+import { useLazyQuery, gql } from "@apollo/client";
+
+const ALL_TODOS = gql`
+  query {
+    allTodos {
+      data {
+        _id
+        text
+        completed
+      }
+    }
+  }
+`;
 
 const INITIAL_STATE = {
   name: "",
@@ -28,6 +41,8 @@ const Form = () => {
 
   const setStatus = (status) => dispatch({ type: "updateStatus", status });
 
+  const [getData, { loading, error, data }] = useLazyQuery(ALL_TODOS);
+
   const updateFieldValue = (field) => (event) =>
     dispatch({
       type: "updateFieldValue",
@@ -37,8 +52,11 @@ const Form = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setStatus("PENDING");
+    setStatus("SUCCESS");
+    getData();
+  };
 
+  /*
     fetch("/api/contact", {
       method: "POST",
       body: JSON.stringify(state),
@@ -53,14 +71,24 @@ const Form = () => {
         setStatus("ERROR");
       });
   };
+  */
 
-  if (state.status === "SUCCESS") {
+  if (data && status !== "IDLE") {
     return (
       <p className={styles.success}>
         Message sent!
+        <ul>
+          {data.allTodos.data.map((todo) => {
+            return (
+              <li key={todo._id}>
+                {todo.text} {todo.completed}
+              </li>
+            );
+          })}
+        </ul>
         <button
           type="reset"
-          onClick={() => dispatch({ type: "reset" })}
+          onClick={() => setStatus("IDLE")}
           className={`${styles.button} ${styles.centered}`}
         >
           Reset
@@ -71,13 +99,11 @@ const Form = () => {
 
   return (
     <>
-      {state.status === "ERROR" && (
+      {error && (
         <p className={styles.error}>Something went wrong. Please try again.</p>
       )}
       <form
-        className={`${styles.form} ${
-          state.status === "PENDING" && styles.pending
-        }`}
+        className={`${styles.form} ${loading && styles.pending}`}
         onSubmit={handleSubmit}
       >
         <label className={styles.label}>

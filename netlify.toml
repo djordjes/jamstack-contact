@@ -2,7 +2,7 @@
     functions = "functions"
 
 [[redirects]]
-    from = "/api/*"
+    from = "/graphql"
     to = "https://graphql.fauna.com/graphql"
     status = 200
     force = true
