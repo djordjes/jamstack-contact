@@ -1,6 +1,6 @@
 [build]
     functions = "functions"
-
+    environment = {FAUNA_URI = "/graphql"}
 [[redirects]]
     from = "/graphql"
     to = "https://graphql.fauna.com/graphql"

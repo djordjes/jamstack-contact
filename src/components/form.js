@@ -56,24 +56,7 @@ const Form = () => {
     getData();
   };
 
-  /*
-    fetch("/api/contact", {
-      method: "POST",
-      body: JSON.stringify(state),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setStatus("SUCCESS");
-      })
-      .catch((error) => {
-        console.error(error);
-        setStatus("ERROR");
-      });
-  };
-  */
-
-  if (data && status !== "IDLE") {
+  if (data && state.status !== "IDLE") {
     return (
       <p className={styles.success}>
         Message sent!
